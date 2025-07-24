@@ -9,7 +9,7 @@ from app.api.v1.admin import api as admin_ns
 from extensions import bcrypt
 from extensions import jwt
 from extensions import db
-
+from flask_cors import CORS
 
 
 authorizations = {
@@ -23,6 +23,16 @@ authorizations = {
 def create_app(config_class="config.DevelopmentConfig"):
     app = Flask(__name__)
     app.config.from_object(config_class)
+
+    CORS(app, ressources={
+        r"/*": {
+            "origins": ["http://localhost:8000", "http://127.0.0.1:8000"],
+            "methods": ["GET", "POST", "PUT", "DELETE"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "allow_credentials": True
+        }
+    }, supports_credentials=True)
+
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API',authorizations=authorizations, doc="/api/v1/docs")
     bcrypt.init_app(app)
     jwt.init_app(app)
