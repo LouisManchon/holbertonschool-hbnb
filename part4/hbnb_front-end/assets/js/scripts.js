@@ -9,15 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
       if (loginForm) {
           loginForm.addEventListener('submit', async (event) => {
             const password = document.getElementById('password').value;
-            console.log(loginForm.password.value);
+            const email = document.getElementById('email').value;
               event.preventDefault();
-              loginUser(loginForm.email.value, password);
+              console.log("hello", password, email);
+              loginUser(email, password);
           });
       }
   });
 
 async function loginUser(email, password) {
-  const response = await fetch('http://localhost:5000/api/v1/auth/login', {
+  console.log(JSON.stringify({ email, password })
+  )
+
+  const response = await fetch('http://127.0.0.1:5000/api/v1/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
