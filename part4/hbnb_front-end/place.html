@@ -4,19 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Place Details</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+    <!-- Header -->
+    <header>
+        <img src="assets/images/logo.png" alt="Application logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html" class="login-button">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
     <main>
-        <section id="place-details">
-            <!-- Place details will be populated dynamically -->
+        <!-- Place Details -->
+        <section class="place-details" id="place-details">
+            <!-- Contenu dynamique : nom, host, description, prix -->
         </section>
+
+        <!-- Reviews -->
         <section id="reviews">
-            <!-- Reviews will be populated dynamically -->
+            <h2>Reviews</h2>
+            <!-- Reviews dynamiques avec class="review-card" -->
         </section>
-        <section id="add-review">
+
+        <!-- Add Review -->
+        <section id="add-review" style="display:none;">
             <h2>Add a Review</h2>
-            <form id="review-form">
+            <form id="review-form" class="add-review form">
                 <label for="review-text">Review:</label>
                 <textarea id="review-text" name="review-text" required></textarea>
 
@@ -24,6 +42,12 @@
             </form>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 All rights reserved.</p>
+    </footer>
+
     <script src="assets/js/scripts.js"></script>
 </body>
 </html>
