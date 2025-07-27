@@ -45,14 +45,19 @@ if (placesList) {
 
 function loadPlaces() {
   const places = [
-    {name: "Cozy Apartment", price: 120 },
-    {name: "Beach House", price: 250 },
-    {name: "Beautiful Villa", price: 350 }
+    {name: "Cozy Apartment", price: 120, image: "assets/images/Cozy-apartment.png" },
+    {name: "Beach House", price: 250, image: "assets/images/beach-house.jpg" },
+    {name: "Beautiful Villa", price: 350, image: "assets/images/beautiful-villa.png" }
   ];
 
   places.forEach(place => {
     const card = document.createElement('div');
     card.classList.add('place-card');
+
+    const img = document.createElement('img');
+    img.src = place.image;
+    img.alt = place.name;
+    img.classList.add('place-image');
 
     const title = document.createElement('h3');
     title.textContent = place.name;
@@ -67,6 +72,7 @@ function loadPlaces() {
       window.location.href = 'place.html';
     });
 
+    card.appendChild(img);
     card.appendChild(title);
     card.appendChild(price);
     card.appendChild(button);
