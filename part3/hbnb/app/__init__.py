@@ -33,7 +33,7 @@ def create_app(config_class="config.DevelopmentConfig"):
         }
     }, supports_credentials=True)
 
-    api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API',authorizations=authorizations, doc="/api/v1/docs")
+    api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API', authorizations=authorizations, security='Bearer', doc="/api/v1/docs")
     bcrypt.init_app(app)
     jwt.init_app(app)
     db.init_app(app)
