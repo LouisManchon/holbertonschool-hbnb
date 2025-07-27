@@ -49,3 +49,28 @@ function loadPlaces() {
     {name: "Beach House", price: 250 },
     {name: "Beautiful Villa", price: 350 }
   ];
+
+  places.forEach(place => {
+    const card = document.createElement('div');
+    card.classList.add('place-card');
+
+    const title = document.createElement('h3');
+    title.textContent = place.name;
+
+    const price = document.createElement('p');
+    price.textContent = `Price: $${place.price} /night`;
+
+    const button = document.createElement('button');
+    button.classList.add('details-button');
+    button.textContent = 'View Details';
+    button.addEventListener('click', () => {
+      window.location.href = 'place.html';
+    });
+
+    card.appendChild(title);
+    card.appendChild(price);
+    card.appendChild(button);
+
+    placesList.appendChild(card);
+  });
+}
