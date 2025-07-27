@@ -36,3 +36,16 @@ async function loginUser(email, password) {
     alert('Login failed: ' + response.statusText);
 }
 }
+
+const placesList = document.getElementById('places-list');
+
+if (placesList) {
+  loadPlaces();
+}
+
+function loadPlaces() {
+  const places = [
+    {name: "Cozy Apartment", price: 120 },
+    {name: "Beach House", price: 250 },
+    {name: "Beautiful Villa", price: 350 }
+  ];
