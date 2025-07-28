@@ -28,7 +28,7 @@ class Place(BaseModel):
     amenities = db.relationship('Amenity', secondary=place_amenity, backref='places', lazy=True)
 
 
-    def __init__(self, title, price, latitude, longitude, owner, description="", amenities=[], reviews={}):
+    def __init__(self, title, price, latitude, longitude, owner, description="", amenities=[], reviews=[]):
         """Initialize multiple parametres"""
 
         super().__init__()
@@ -49,7 +49,7 @@ class Place(BaseModel):
         if len(title) > 100:
             raise ValueError("Title must be max 100 characters")
         return title
-    
+
     @validates("description")
     def validate_description(self, _, description):
         if description is not None and not isinstance(description, str):

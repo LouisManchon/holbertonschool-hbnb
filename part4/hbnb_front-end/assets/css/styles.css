@@ -13,6 +13,22 @@
 body {
     background-color: #f4f4f4;
     color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    text-align: center;
+    bottom: 0;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer p {
+    text-align: center;
 }
 
 /* Header */
@@ -38,6 +54,7 @@ nav a {
 /* Main content */
 main {
     padding: 2rem;
+    flex: 1;
 }
 
 /* Centrer et styliser le titre */

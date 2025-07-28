@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
               loginUser(email, password);
           });
       }
+      const token = getCookie("token");
   });
 
 async function loginUser(email, password) {
@@ -69,7 +70,7 @@ function loadPlaces() {
     button.classList.add('details-button');
     button.textContent = 'View Details';
     button.addEventListener('click', () => {
-      window.location.href = 'place.html';
+      window.location.href = `place.html?id=${place.id}`
     });
 
     card.appendChild(img);
@@ -79,4 +80,23 @@ function loadPlaces() {
 
     placesList.appendChild(card);
   });
+}
+
+function checkAuthentication() {
+  const token = getCookie('token');
+  const loginLink = document.getElementById('login-link');
+
+  if (!token) {
+    loginLink.style.display = 'block';
+  } else {
+    loginLink.style.display = 'none';
+    // Fetch places data if the user is authenticated
+    fetchPlaces(token);
+  }
+}
+
+function getCookie(name) {
+  let value = document.cookie;
+  value = value.split('=')[1];
+  return (value);
 }
