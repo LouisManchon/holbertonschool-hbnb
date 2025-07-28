@@ -179,11 +179,18 @@ function checkAuthentication() {
 
 function filterPrice(price) {
   const places = document.querySelectorAll('.place-card');
+
   for (let i = 0; i < places.length; i++) {
-    if (price < places[i].getAttribute('price')) {
-      places[i].style.display = 'none';
-    } else {
+    const placePrice = parseFloat(places[i].getAttribute('price'));
+
+    if (price === "" || isNaN(price)) {
       places[i].style.display = 'block';
+    } else {
+      if (placePrice > parseFloat(price)) {
+        places[i].style.display = 'none';
+      } else {
+        places[i].style.display = 'block';
+      }
     }
   }
 }
