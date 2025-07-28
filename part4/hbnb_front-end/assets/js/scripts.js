@@ -2,8 +2,9 @@
   This is a SAMPLE FILE to get you started.
   Please, follow the project instructions to complete the tasks.
 */
+const priceFilter = document.querySelector('#price-filter');
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const loginForm = document.getElementById('login-form');
 
       if (loginForm) {
@@ -15,9 +16,27 @@ document.addEventListener('DOMContentLoaded', () => {
               loginUser(email, password);
           });
       }
+
       const token = getCookie("token");
+       if (document.querySelector('#places-list')) {
       loadPlaces();
-  });
+    }
+
+    if (document.querySelector('#place-details')) {
+    const placeId = getPlaceIdFromURL();
+    const place = await fetchPlaceDetails(token, placeId);
+    displayPlaceDetails(place);
+  }
+
+  if (priceFilter) {
+    priceFilter.addEventListener('change', (event) => {
+      filterPrice(priceFilter.value);
+    })
+  }
+
+
+});
+
 
 async function loginUser(email, password) {
   console.log(JSON.stringify({ email, password })
@@ -68,6 +87,7 @@ async function loadPlaces() {
   for (let i = 0; i < places.length; i++) {
     const card = document.createElement('div');
     card.classList.add('place-card');
+    card.setAttribute('price', places[i].price);
 
     //const img = document.createElement('img');
     //img.src = place.image;
@@ -114,4 +134,56 @@ function getCookie(name) {
   let value = document.cookie;
   value = value.split('=')[1];
   return (value);
+}
+
+function getPlaceIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('id');
+}
+
+
+async function fetchPlaceDetails(token, placeId) {
+  const response = await fetch(`http://127.0.0.1:5000/api/v1/places/${placeId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+
+  if (response.ok) {
+    return await response.json();
+  } else {
+    alert('Failed to fetch place details: ' + response.statusText);
+  }
+}
+
+
+function displayPlaceDetails(place) {
+  const container = document.getElementById('place-details');
+    container.innerHTML = `
+      <h2>${place.title}</h2>
+      <p>${place.description}</p>
+      <p><strong>Price:</strong> $${place.price}/night</p>
+      <p><strong>Latitude:</strong> ${place.latitude}</p>
+      <p><strong>Longitude:</strong> ${place.longitude}</p>
+    `;
+}
+
+function checkAuthentication() {
+    const token = getCookie('token');
+    const reviewSection = document.getElementById('add-review');
+    if (!reviewSection) return;
+    reviewSection.style.display = token ? 'block' : 'none';
+}
+
+function filterPrice(price) {
+  const places = document.querySelectorAll('.place-card');
+  for (let i = 0; i < places.length; i++) {
+    if (price < places[i].getAttribute('price')) {
+      places[i].style.display = 'none';
+    } else {
+      places[i].style.display = 'block';
+    }
+  }
 }
