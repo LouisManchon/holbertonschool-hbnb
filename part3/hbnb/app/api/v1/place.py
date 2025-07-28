@@ -59,7 +59,8 @@ class PlaceList(Resource):
                 'id': place.id,
                 'title': place.title,
                 'latitude': place.latitude,
-                'longitude': place.longitude
+                'longitude': place.longitude,
+                'price': place.price
             })
 
         return result, 200

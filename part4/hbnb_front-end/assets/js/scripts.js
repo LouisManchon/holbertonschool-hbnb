@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
           });
       }
       const token = getCookie("token");
+      loadPlaces();
   });
 
 async function loginUser(email, password) {
@@ -38,48 +39,62 @@ async function loginUser(email, password) {
 }
 }
 
-const placesList = document.getElementById('places-list');
-
-if (placesList) {
-  loadPlaces();
+async function fetchPlaces(token) {
+  const response = await fetch('http://127.0.0.1:5000/api/v1/places/', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    }
+  });
+  if (response.ok) {
+    const data = await response.json();
+    return data;
+    //displayPlaces(data);
+  } else {
+    alert('Recuperation failed: ' + response.statusText);
+  }
 }
 
-function loadPlaces() {
-  const places = [
-    {name: "Cozy Apartment", price: 120, image: "assets/images/Cozy-apartment.png" },
-    {name: "Beach House", price: 250, image: "assets/images/beach-house.jpg" },
-    {name: "Beautiful Villa", price: 350, image: "assets/images/beautiful-villa.png" }
-  ];
 
-  places.forEach(place => {
+async function loadPlaces() {
+  const placesList = document.querySelector('#places-list');
+  const places = await fetchPlaces().then(
+    data => {return data}
+  );
+
+  console.log(places);
+
+  for (let i = 0; i < places.length; i++) {
     const card = document.createElement('div');
     card.classList.add('place-card');
 
-    const img = document.createElement('img');
-    img.src = place.image;
-    img.alt = place.name;
-    img.classList.add('place-image');
+    //const img = document.createElement('img');
+    //img.src = place.image;
+    //img.alt = place.name;
+    //img.classList.add('place-image');
 
     const title = document.createElement('h3');
-    title.textContent = place.name;
+    title.textContent = places[i].title;
 
     const price = document.createElement('p');
-    price.textContent = `Price: $${place.price} /night`;
+    price.textContent = `Price: $${places[i].price} /night`;
 
     const button = document.createElement('button');
     button.classList.add('details-button');
     button.textContent = 'View Details';
     button.addEventListener('click', () => {
-      window.location.href = `place.html?id=${place.id}`
+      window.location.href = `place.html?id=${places[i].id}`
     });
 
-    card.appendChild(img);
+
+    //card.appendChild(img);
     card.appendChild(title);
     card.appendChild(price);
     card.appendChild(button);
 
     placesList.appendChild(card);
-  });
+  };
 }
 
 function checkAuthentication() {
