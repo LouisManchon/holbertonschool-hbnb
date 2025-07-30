@@ -280,7 +280,7 @@ async function loadReviews(placeId) {
           reviewCard.innerHTML = `
             <p><strong>Rating:</strong> ${review.rating}/5</p>
             <p>${review.text}</p>
-            <p><small>By User: ${review.user}</small></p>
+            <p><small>By User: ${review.user.first_name}</small></p>
           `;
           reviewsList.appendChild(reviewCard);
         });

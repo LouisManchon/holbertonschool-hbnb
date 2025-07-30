@@ -70,7 +70,7 @@ class Review(BaseModel):
             'text': self.text,
             'rating': self.rating,
             'place': self.place.id,
-            'user': self.user.id
+            'user': self.user.to_dict()
         }
 
     def __str__(self):
