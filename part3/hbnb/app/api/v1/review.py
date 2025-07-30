@@ -28,17 +28,21 @@ class ReviewList(Resource):
             return {'error': 'Place not found'}, 404
 
         if place.owner.id == current_user_id:
-            return {'error': 'You cannot review your own place.'}
-    
+            return {'error': 'You cannot review your own place.'}, 400
+
         for review in place.reviews:
             if review.user.id == current_user_id:
                 return {'error': 'You have already reviewed this place.'}, 400
+
+        # Forcer l'user à être celui connecté (ignore ce que le client a envoyé)
+        user_review["user"] = current_user_id
 
         try:
             new_review = facade.create_review(user_review)
         except (TypeError, ValueError) as e:
             return {'error': str(e)}, 400
         return new_review.to_dict(), 201
+
 
     @api.response(200, 'List of reviews retrieved successfully')
     def get(self):
