@@ -1,152 +1,189 @@
-/*
-  This is a SAMPLE File to get you started. Follow the instructions on the project to complete the tasks.
-  You'll probably need to override some of these styles.
-*/
-
+/* Reset & base */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
+    background: #f9fafc;
+    color: #2e2e2e;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    line-height: 1.6;
 }
 
+/* Footer */
 footer {
     text-align: center;
-    bottom: 0;
-    height: 80px;
+    height: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-footer p {
-    text-align: center;
+    background-color: #1f2937; /* Darker footer */
+    color: #ccc;
+    font-size: 0.9rem;
 }
 
 /* Header */
 header {
-    background-color: #333;
+    background-color: #2563eb; /* Blue 600 */
     color: #fff;
-    padding: 1rem;
+    padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 8px rgb(37 99 235 / 0.3);
 }
 
 header .logo {
-    height: 40px;
+    height: 45px;
+    cursor: pointer;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav li {
+    margin-left: 1.5rem;
 }
 
 nav a {
     color: #fff;
     text-decoration: none;
-    margin-left: 1rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+    background-color: #1d4ed8; /* Blue 700 */
+    box-shadow: 0 2px 6px rgb(29 78 216 / 0.5);
 }
 
 /* Main content */
 main {
-    padding: 2rem;
+    padding: 2rem 3rem;
     flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* Centrer et styliser le titre */
+/* Page title */
 .page-title {
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #1e293b; /* Slate 900 */
 }
 
-/* Filtre centré et joli */
+/* Filter section */
 .filter-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 15px;
     margin-bottom: 40px;
 }
 
 .filter-section label {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #475569; /* Slate 600 */
 }
 
 .filter-section select {
-    padding: 8px 12px;
-    font-size: 1rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    padding: 10px 14px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    border: 2px solid #94a3b8; /* Slate 400 */
     background-color: #fff;
     cursor: pointer;
     transition: all 0.3s ease;
+    min-width: 140px;
 }
 
-.filter-section select:hover {
-    border-color: #333;
+.filter-section select:hover,
+.filter-section select:focus {
+    border-color: #2563eb;
+    outline: none;
+    box-shadow: 0 0 8px rgb(37 99 235 / 0.6);
 }
 
-/* Liste des places */
+/* Places list */
 #places-list {
     display: flex;
-    gap: 40px;
+    gap: 35px;
     flex-wrap: wrap;
     justify-content: center;
-    margin-top: 20px;
 }
 
-/* Cartes plus grandes */
+/* Place cards */
 .place-card {
-    width: 350px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 340px;
+    background-color: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.07);
     overflow: hidden;
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .place-card:hover {
-    transform: scale(1.03);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px rgba(37, 99, 235, 0.3);
 }
 
-/* Image pleine largeur */
+/* Placeholder image style */
 .place-card img {
     width: 100%;
     height: 220px;
     object-fit: cover;
 }
 
-/* Texte */
+/* Card content */
 .place-card h3 {
-    margin: 15px 0 5px;
-    font-size: 1.3rem;
+    margin: 18px 0 6px;
+    font-size: 1.4rem;
+    color: #1e293b;
+    font-weight: 700;
 }
 
 .place-card p {
-    color: #555;
-    margin-bottom: 15px;
+    color: #64748b; /* Slate 500 */
+    margin-bottom: 20px;
+    font-size: 1rem;
 }
 
-/* Bouton */
+/* Button */
 .details-button {
-    background-color: #333;
+    background-color: #2563eb;
     color: #fff;
     border: none;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 0 0 14px 14px;
     cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: 15px;
     transition: background-color 0.3s ease;
+    width: 100%;
+    letter-spacing: 0.05em;
 }
 
 .details-button:hover {
-    background-color: #555;
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 12px rgb(29 78 216 / 0.6);
 }
