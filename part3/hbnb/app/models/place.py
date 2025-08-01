@@ -96,6 +96,8 @@ class Place(BaseModel):
             'id': self.id,
             'title': self.title,
             'description': self.description,
+            'price': self.price,
+            'owner_id': self.owner.id if self.owner else None,
             'latitude': self.latitude,
             'longitude': self.longitude,
             'owner': {
@@ -118,6 +120,7 @@ class Place(BaseModel):
             'title': self.title,
             'price': self.price,
             'description': self.description,
+            'price': self.price,
             'latitude': self.latitude,
             'longitude': self.longitude,
             'owner_id': self.owner.id
